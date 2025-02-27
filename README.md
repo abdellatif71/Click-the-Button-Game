@@ -20,4 +20,3 @@ Ein einfaches Browser-Spiel, bei dem der Spieler innerhalb von 30 Sekunden so of
 Dieses Projekt steht unter der MIT-Lizenz.
 
 ## Autor
-Erstellt von Abdellatif Abouelabbes
