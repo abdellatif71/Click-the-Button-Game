@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click the Button Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #click-button {
+            position: absolute;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #score {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Click the Button Game</h1>
+    <p>Click the button as many times as you can in 30 seconds!</p>
+    <div class="game-container">
+        <button id="click-button">Click Me!</button>
+    </div>
+    <p id="score">Score: 0</p>
+    <script>
+        let score = 0;
+        let timeLeft = 30;
+        const button = document.getElementById("click-button");
+        const scoreDisplay = document.getElementById("score");
+        
+        function moveButton() {
+            const maxX = window.innerWidth - button.offsetWidth;
+            const maxY = window.innerHeight - button.offsetHeight;
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            button.style.left = `${randomX}px`;
+            button.style.top = `${randomY}px`;
+        }
+        
+        button.addEventListener("click", () => {
+            if (timeLeft > 0) {
+                score++;
+                scoreDisplay.textContent = `Score: ${score}`;
+                moveButton();
+            }
+        });
+        
+        function startGame() {
+            moveButton();
+            const timer = setInterval(() => {
+                timeLeft--;
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    button.disabled = true;
+                    button.textContent = "Game Over";
+                }
+            }, 1000);
+        }
+        
+        startGame();
+    </script>
+</body>
+</html>
